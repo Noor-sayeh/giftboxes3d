@@ -40,7 +40,7 @@ export default function GiftBoxPage() {
   const isLidSupported = lidSupportedModels.includes(modelPath);
 
   return (
-    <div style={{ width: "100vw", height: "100vh", display: "flex", flexDirection: "column" }}>
+    <div style={{ minHeight: "100vh", display: "flex", flexDirection: "column" }}>
       {/* Main Layout: Left Options + Right 3D */}
       <div style={{ flex: 1, display: "flex" }}>
         {/* Left Sidebar */}
@@ -87,7 +87,7 @@ export default function GiftBoxPage() {
       </div>
 
       {/* Box selector - always at bottom */}
-      <div style={{ padding: 10 }}>
+      <div style={{ marginTop: "-40px", paddingBottom: "30px" }}>
         <p style={{ fontWeight: "bold", textAlign: "center" }}>🧰 Choose Gift Box Model:</p>
         <div
           style={{
@@ -96,6 +96,8 @@ export default function GiftBoxPage() {
             gap: 12,
             padding: "10px",
             justifyContent: "center",
+            maxWidth: "100%",
+            scrollbarWidth: "none",
           }}
         >
           {boxOptions.map((box, i) => (
