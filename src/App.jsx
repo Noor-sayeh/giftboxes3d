@@ -62,7 +62,7 @@ const lidSupportedModels = [
 const isLidSupported = lidSupportedModels.includes(modelPath);
 
   return (
-    <div style={{ display: "flex", width: "100vw", height: "100vh" }}>
+    <div style={{ display: "flex", flexDirection: "column", width: "100vw", height: "100vh" }}>
       <div style={{ padding: 20 }}>
         <label>
           🎁 <b>Box Color:</b><br />
@@ -89,27 +89,65 @@ const isLidSupported = lidSupportedModels.includes(modelPath);
 )}
 
 
-        <br /><br />
+       
 
         <label>
           🎀 <b>Ribbon Color:</b><br />
           <input type="color" value={ribbonColor} onChange={(e) => setRibbonColor(e.target.value)} />
         </label>
 
-        <div style={{ marginTop: 20 }}>
-  <p><b>Choose Gift Box Model:</b></p>
-  <div style={{ display: "flex", gap: "10px", flexWrap: "wrap" }}>
-    {boxOptions.map((box, i) => (
-      <img
+        
+
+      </div>
+
+      <div style={{ flex: 1 }}>
+  <Canvas camera={{ position: [0, 0, 10], fov: 40 }}>
+    <ambientLight intensity={0.5} />
+     <directionalLight position={[5, 5, 5]} />
+     <OrbitControls
+      enableZoom={true}
+      enablePan={true}
+      enableRotate={true}
+      maxPolarAngle={Math.PI}
+      minPolarAngle={0}
+     />
+      <GiftBoxModel
+      modelPath={modelPath}
+      boxColor={boxColor}
+      lidColor={lidColor}
+      ribbonColor={ribbonColor}
+      />
+    </Canvas>
+   </div>
+   <hr style={{ margin: "20px auto", width: "50%", border: "1px solid #eee" }} />
+
+<div style={{
+  marginTop: "-100px", // ✅ هيك بنرفعه لفوق شوي
+  display: "flex",
+  flexDirection: "column",
+  alignItems: "center",
+  justifyContent: "center"
+}}>
+
+  <p style={{ fontWeight: "bold", marginBottom: 10 }}>🎨 Choose Gift Box Model:</p>
+  <div style={{
+    display: "flex",
+    gap: "15px",
+    flexWrap: "wrap",
+    justifyContent: "center"
+  }}>
+
+       {boxOptions.map((box, i) => (
+       <img
         key={i}
         src={box.thumbnail}
         alt={box.name}
         onClick={() => {
-  setModelPath(box.path);
-  setBoxColor(box.defaults.boxColor);
-  setLidColor(box.defaults.lidColor);
-  setRibbonColor(box.defaults.ribbonColor);
-}}
+            setModelPath(box.path);
+           setBoxColor(box.defaults.boxColor);
+           setLidColor(box.defaults.lidColor);
+            setRibbonColor(box.defaults.ribbonColor);
+            }}
 
         style={{
           width: 80,
@@ -125,26 +163,7 @@ const isLidSupported = lidSupportedModels.includes(modelPath);
     ))}
   </div>
 </div>
-
-      </div>
-
-      <div style={{ flex: 1 }}>
-        <Canvas camera={{ position: [0, 0, 10], fov: 40 }}>
-          <ambientLight intensity={0.5} />
-          <directionalLight position={[5, 5, 5]} />
-          <OrbitControls  enableZoom={true}
-  enablePan={true}
-  enableRotate={true}
-  maxPolarAngle={Math.PI}  // دوران كامل
-  minPolarAngle={0}/>
-          <GiftBoxModel
-            modelPath={modelPath}
-            boxColor={boxColor}
-            lidColor={lidColor}
-            ribbonColor={ribbonColor}
-          />
-        </Canvas>
-      </div>
     </div>
+    
   );
 }
