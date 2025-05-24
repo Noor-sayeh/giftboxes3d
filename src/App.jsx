@@ -8,6 +8,18 @@ export default function GiftBoxPage() {
   const [boxColor, setBoxColor] = useState("#9D0202");
   const [lidColor, setLidColor] = useState("#9D0202");
   const [ribbonColor, setRibbonColor] = useState("#C59E11");
+  
+  
+useEffect(() => {
+  window.getSelectedBoxData = function () {
+    return JSON.stringify({
+      box: modelPath.split("/").pop(), // يعطي اسم الملف مثل box.glb
+      boxColor,
+      lidColor,
+      ribbonColor,
+    });
+  };
+}, [modelPath, boxColor, lidColor, ribbonColor]); 
 
   const boxOptions = [
     {
