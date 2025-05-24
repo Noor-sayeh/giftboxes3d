@@ -1,6 +1,6 @@
 import { Canvas } from "@react-three/fiber";
 import { OrbitControls } from "@react-three/drei";
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import GiftBoxModel from "./models/GiftBoxModel";
 
 export default function GiftBoxPage() {
